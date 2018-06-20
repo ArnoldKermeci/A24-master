@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="rs.aleph.android.example24">
+
+    <!--
+    Posto zelimo da pozivamo servis samo kada smo povezani sa WIFI-jem
+    moramo dodati prava nasoj aplikaciji:
+        1) da moze da se poveze na internet
+        2) da moze da proveri trenutno stanje povezanosti na mrezu
+    -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!--
+    Posto zelimo da pisemo odnosno citamo iz skladista podataka moramo traziti i
+    odredjena dopustenja od strane operativnog sistema
+    -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="rs.aleph.android.example24.activities.MainActivity"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/activity_main_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="rs.aleph.android.example24.activities.SettingsActivity"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/activity_settings_name"
+            android:parentActivityName="rs.aleph.android.example24.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <!--
+        Moramo definisati punu putanju do naseg servis-a.
+        Ovo je obavezno, bez definicije servis-a necemo moci ni da ga koristimo.
+        -->
+        <service android:name="rs.aleph.android.example24.async.SimpleService" />
+
+        <!--
+        Moramo definisati punu putanju do naseg receiver-a.
+        Ovo je obavezno, bez definicije receiver-a necemo moci ni da ga koristimo.
+        -->
+        <receiver android:name="rs.aleph.android.example24.async.SimpleReceiver" />
+
+    </application>
+
+</manifest>
